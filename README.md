@@ -14,16 +14,19 @@ This repository is set up as a simple Quarto website project with:
 
 The simplest option is to click **Use this template** on GitHub, create your own repository, and then clone it to your machine.
 
+**Note** The website build will first fail and you will probably recevie an email from GitHub. Worry not! We solve this issue in the next section.
+
+```text
+ERROR: Unable to publish to GitHub Pages (the remote origin does not have a branch named "gh-pages". Use first `quarto publish gh-pages` locally to initialize the remote repository for publishing.)
+```
+
 If you want to do it from the command line with GitHub CLI, you can create a new repository from this template and clone it in one step:
 
 ```bash
 gh repo create YOUR-USERNAME/YOUR-REPO --public --template OWNER/TEMPLATE-REPO --clone
 ```
 
-Notes:
-
-- For standard GitHub Pages usage, make the repository public.
-- If you are working inside an organization, an internal repository may also be an option depending on your organization's GitHub plan and Pages settings.
+For standard GitHub Pages usage, make the repository public. If you are working inside an organization, an internal repository may also be an option depending on your organization's GitHub plan and Pages settings.
 
 ### 2. Publish the site from your local machine
 
@@ -60,6 +63,14 @@ See [GitHub Docs for a more visual guide](https://docs.github.com/en/pages/getti
 ### 4. Add the website URL to the repository description
 
 Take the website URL and add it to the repository description or homepage field on GitHub so people can spot and open the live site quickly.
+
+At the GitHub repository page, click **Settings** (gear icon) on the left side from **About**. 
+
+![GitHub repository website about section and website link.](/images/github_about-section.png)
+
+If GitHub Pages are set, then you can click **Use your GitHub Pages website** and **Save Changes**. For additional karma points, add a short description so others and yourself know what this website is about.
+
+![Click **Use your GitHub Pages website** and add description.](image.png)
 
 ## For the Detail-Oriented
 
@@ -115,7 +126,7 @@ If you prefer to work mostly with GitHub CLI, `gh` can also help you create, clo
 
 ### GitHub Actions workflow
 
-This template already includes a GitHub Actions workflow at [`.github/workflows/publish.yml`](/Users/igorsdubanevics/projects/quarto-website/.github/workflows/publish.yml).
+This template already includes a GitHub Actions workflow at [`.github/workflows/publish.yml`](/Users/igorsdubanevics/projects/quarto-website/.github/workflows/publish.yml). `.github` is a special directory, a la `.git`, that is recognized by GitHub.
 
 That workflow is configured to publish on pushes to `main`, using Quarto's official GitHub Action. It is helpful if you want GitHub to handle rendering and publishing after you push changes.
 
