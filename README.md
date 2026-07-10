@@ -10,75 +10,38 @@ This repository is set up as a simple Quarto website project with:
 
 ## Quick Start
 
-### 1. Create your own repository from this template
-
-The simplest option is to click **Use this template** on GitHub, create your own repository, and then clone it to your machine.
-
-**Note** The website build will first fail and you will probably recevie an email from GitHub. Worry not! We solve this issue in the next section.
-
-```text
-ERROR: Unable to publish to GitHub Pages (the remote origin does not have a branch named "gh-pages". Use first `quarto publish gh-pages` locally to initialize the remote repository for publishing.)
-```
-
-If you want to do it from the command line with GitHub CLI, you can create a new repository from this template and clone it in one step:
-
-```bash
-gh repo create YOUR-USERNAME/YOUR-REPO --public --template OWNER/TEMPLATE-REPO --clone
-```
+Create your own repository from this template. If you use the GitHub web UI, make sure to include **all branches** so the `gh-pages` branch comes along.
 
 For standard GitHub Pages usage, make the repository public. If you are working inside an organization, an internal repository may also be an option depending on your organization's GitHub plan and Pages settings.
 
-### 2. Publish the site from your local machine
+Your browser should like this
+![Creating a repository from a template.](/images/github_using-template.png)
 
-From the root of the repository, publish the site to the `gh-pages` branch:
+Next, press **Create repository**.
+![alt text](/images/github_create-repo-button.png)
 
-```bash
-quarto publish gh-pages
-```
+GitHub Actions will start it magic and in less then a minute you will have your functional and publically running website.
 
-Quarto will render the website, create or update the `gh-pages` branch, and push the published site to GitHub.
-
-You can also build locally first if you want to check the output before publishing:
-
-```bash
-quarto preview
-```
-
-This command starts a local server in your terminal and automatically opens the rendered website in your default browser. You can live-edit `.qmd` files and see those changes reflected in the website automatically.
-
-### 3. Tell GitHub Pages to use the `gh-pages` branch
-
-After the first publish:
-
-1. Open your repository on GitHub.
-2. Go to **Settings** -> **Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select the `gh-pages` branch and the `/(root)` folder.
-5. Save.
-
-Once GitHub Pages finishes deploying, your website will be available at its GitHub Pages URL.
-
-See [GitHub Docs for a more visual guide](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch).
-
-### 4. Add the website URL to the repository description
-
-Take the website URL and add it to the repository description or homepage field on GitHub so people can spot and open the live site quickly.
-
-At the GitHub repository page, click **Settings** (gear icon) on the left side from **About**. 
+For extra karma points add the website URL to the repository About section. At the GitHub repository page, click **Settings** (gear icon) on the left side from **About**.
 
 ![GitHub repository website about section and website link.](/images/github_about-section.png)
 
-If GitHub Pages are set, then you can click **Use your GitHub Pages website** and **Save Changes**. For additional karma points, add a short description so others and yourself know what this website is about.
+If GitHub Pages are set, then you can click **Use your GitHub Pages website** and **Save Changes**.
 
 ![Click **Use your GitHub Pages website** and add description.](/images/github_edit-repo-details.png)
 
+Now, you can clone the repository and do the edits locally. When you will be pushing the website to the GitHub remote, GitHub Action swill automatically build and deploy it to the GitHub Pages.
+If you only use vanilla Quarto, then you are good to go. For additianl depdenies you need to update [`.github/workflows/publish.yml`](/Users/igorsdubanevics/projects/quarto-website/.github/workflows/publish.yml).
+
 ## For the Detail-Oriented
 
-### Install Quarto
+### Install Quarto (optional)
 
 Visit [Quarto Getting Started](https://quarto.org/docs/get-started/) to download the official distribution.
 
-If you prefer terminal installation use `brew` or `apt-get` or whaterver pacakge manager you use.
+You only need Quarto locally if you want to preview, render, or publish the site from your machine. If you created the repository from the template and included all branches, GitHub Pages can already build the website without this local setup step.
+
+If you prefer terminal installation, use `brew`, `apt-get`, or whichever package manager you normally use.
 
 On macOS with Homebrew:
 
@@ -99,6 +62,22 @@ After installing, confirm Quarto is available:
 quarto --version
 ```
 
+### If you did not include all branches
+
+If you create the repository from the template without including all branches, the `gh-pages` branch will not exist yet. In that case, the initial website build can fail until you create that branch locally.
+
+From the root of the repository, run:
+
+```bash
+quarto publish gh-pages
+```
+
+Quarto will render the website, create or update the `gh-pages` branch, and push the published site to GitHub.
+
+After that, open **Settings** -> **Pages** and confirm GitHub Pages is publishing from the `gh-pages` branch and the `/(root)` folder.
+
+See [GitHub Docs for a more visual guide](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch).
+
 ### Useful local commands
 
 Preview the site locally while editing:
@@ -115,6 +94,12 @@ quarto render
 
 ### GitHub CLI alternative flow
 
+If you want to create the repository from the command line with GitHub CLI and include all template branches, use:
+
+```bash
+gh repo create YOUR-USERNAME/YOUR-REPO --public --template OWNER/TEMPLATE-REPO --include-all-branches --clone
+```
+
 If you created the repository on GitHub first, you can clone it with:
 
 ```bash
@@ -122,15 +107,13 @@ git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
 cd YOUR-REPO
 ```
 
-If you prefer to work mostly with GitHub CLI, `gh` can also help you create, clone, and manage the repository from the terminal.
+If you prefer to work mostly with GitHub CLI, `gh` can also help you create, clone, and manage the repository from the terminal. The key flag for this template is `--include-all-branches`, since it brings over the prebuilt `gh-pages` branch too.
 
 ### GitHub Actions workflow
 
 This template already includes a GitHub Actions workflow at [`.github/workflows/publish.yml`](/Users/igorsdubanevics/projects/quarto-website/.github/workflows/publish.yml). `.github` is a special directory, a la `.git`, that is recognized by GitHub.
 
 That workflow is configured to publish on pushes to `main`, using Quarto's official GitHub Action. It is helpful if you want GitHub to handle rendering and publishing after you push changes.
-
-For this workflow-based approach, it is still useful to do an initial local publish so the GitHub Pages branch and Quarto publish configuration are set up cleanly.
 
 ### Files you will likely edit
 
