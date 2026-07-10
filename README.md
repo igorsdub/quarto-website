@@ -70,7 +70,7 @@ At the GitHub repository page, click **Settings** (gear icon) on the left side f
 
 If GitHub Pages are set, then you can click **Use your GitHub Pages website** and **Save Changes**. For additional karma points, add a short description so others and yourself know what this website is about.
 
-![Click **Use your GitHub Pages website** and add description.](image.png)
+![Click **Use your GitHub Pages website** and add description.](/images/github_edit-repo-details.png)
 
 ## For the Detail-Oriented
 
